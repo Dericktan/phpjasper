@@ -193,7 +193,7 @@ $jasper->process(
 )->execute();
 ```
 
-###Using JasperPHP with Laravel 5.2!
+###Using JasperPHP with Laravel 5.*
 
 1. Install [Composer](http://getcomposer.org) if you don't have it.
 ```
@@ -247,9 +247,9 @@ Route::get('/reports', function () {
 In this example we generate reports pdf, rtf and xml.
 
 
-###Additional Information - Reports from a xml in Laravel 5.2
+###Reports from a xml in PHP/Laravel 5.*
 
-See how easy it is to generate a report with a source an xml file:
+See how easy it is to generate a report with a source an XML file:
 
 ```php
 
@@ -262,7 +262,9 @@ public function xmlToPdf()
         $data_file = public_path() . '/report/CancelAck.xml';
         $driver = 'xml';
         $xml_xpath = '/CancelResponse/CancelResult/ID';
-				$jasper = new JasperPHP;
+		
+        $jasper = new JasperPHP;
+        
         $jasper->process(
             public_path() . '/report/CancelAck.jrxml',
             $output,
@@ -296,9 +298,10 @@ and
 to folder:
 **\public\report**
 
-###Additional Information - Reports from a xml in Laravel 5.2
 
-See how easy it is to generate a report with a source an json file:
+###Reports from a JSON File in PHP/Laravel 5.*
+
+See how easy it is to generate a report with a source an JSON file:
 
 ```php
 
@@ -308,26 +311,23 @@ public function jsonToPdf()
     {
         $output = public_path() . '/report/'.time().'_Contacts';
         $ext = "pdf";
-				$driver = 'json';
-				$json_query= "contacts.person";
+        $driver = 'json';
+        $json_query= "contacts.person";
         $data_file = public_path() . '/report/contacts.json';
 
-				$jasper = new JasperPHP;
+        $jasper = new JasperPHP;
+
         $jasper->process(
             public_path() . '/report/json.jrxml',
             $output,
             array($ext),
             array(),
-            array(
-							'driver' => $driver,
-							'json_query' => $json_query,
-							'data_file' => $data_file
-						)
+            array('data_file' => $data_file, 'driver' => $driver, 'json_query' => $json_query
         )->execute();
 
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename='.time().'_CancelAck.'.$ext);
+        header('Content-Disposition: attachment; filename='.time().'_Contacts.'.$ext);
         header('Content-Transfer-Encoding: binary');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -338,6 +338,7 @@ public function jsonToPdf()
 
     }
 ```
+
 **Note:**
 
 To use the example above you must copy the sample files located at:
@@ -371,8 +372,6 @@ Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://ja
 Drop me a line on Skype [leandro.bittencourt16] or E-Mail [leandrocintrabitencourt@gmail.com]
 
 Drop me a line on Skype [danielrodrigueslima] or E-Mail [danielrodrigues-ti@hotmail.com]
-
-Drop me a line on E-Mail [jefferson.barreto@outlook.com]
 
 Drop me a line on E-Mail [derick.tan988@gmail.com]
 
