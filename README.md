@@ -339,6 +339,9 @@ public function jsonToPdf()
     }
 ```
 
+###Set Password to exported PDF
+
+
 **Note:**
 
 To use the example above you must copy the sample files located at:

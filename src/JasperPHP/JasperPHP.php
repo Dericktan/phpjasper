@@ -60,7 +60,7 @@ class JasperPHP
         return $this;
     }
 
-    public function process($input_file, $output_file = false, $format = array('pdf'), $parameters = array(), $db_connection = array(), $background = true, $redirect_output = true)
+    public function process($input_file, $output_file = false, $format = array('pdf'), $parameters = array(), $db_connection = array(), $background = true, $redirect_output = true, $options = array())
     {
         if(is_null($input_file) || empty($input_file))
             throw new \Exception('No input file', 1);
@@ -145,6 +145,11 @@ class JasperPHP
 
             if ( isset($db_connection['json_query']) )
                 $command .= ' --json-query ' . $db_connection['json_query'];
+        }
+
+        if ( count($option) > 0 ) {
+            if( isset($option['password']) )
+                $command .= ' --password ' . $option['password'];
         }
 
         $this->redirect_output  = $redirect_output;
